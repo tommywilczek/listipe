@@ -12,14 +12,21 @@ export class ShoppingListService {
   ];
   
   constructor() { }
-
+  
   getIngredients() {
     return this.ingredients.slice();
   }
-
+  
   addIngredient(newIngredient: Ingredient) {
     this.ingredients.push(newIngredient);
     this.ingredientsChangedEvent.emit(this.ingredients.slice());
   }
-
+  
+  addIngredientsToShoppingList(ingredients: Ingredient[]) {
+    // ingredients.forEach(ing => {
+      //   this.addIngredient(ing);
+      // });
+      this.ingredients.push(... ingredients);
+      this.ingredientsChangedEvent.emit(this.ingredients.slice());
+  }
 }
