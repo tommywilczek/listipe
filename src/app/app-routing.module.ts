@@ -6,14 +6,15 @@ import { ShoppingListComponent } from './shoppingComponents/shopping-list/shoppi
 import { PleaseSelectRecipeComponent } from './recipeComponents/please-select-recipe/please-select-recipe.component';
 import { RecipeDetailComponent } from './recipeComponents/recipe-detail/recipe-detail.component';
 import { RecipeEditComponent } from './recipeComponents/recipe-edit/recipe-edit.component';
+import { RecipesResolverService } from './services/recipes-resolver.service';
 
 const routes: Routes = [
   { path: '', redirectTo: '/recipes', pathMatch: 'full' },
   { path: 'recipes', component: RecipesComponent, children: [
     { path: '', component: PleaseSelectRecipeComponent, pathMatch: 'full' },
     { path: 'new', component: RecipeEditComponent}, // Hard-coded routes should come before dynamic parameters.
-    { path: ':id', component: RecipeDetailComponent}, // If this and the one above it were switched, it would try to look for an id of 'new'
-    { path: ':id/edit', component: RecipeEditComponent},
+    { path: ':id', component: RecipeDetailComponent, resolve: [RecipesResolverService]}, // If this and the one above it were switched, it would try to look for an id of 'new'
+    { path: ':id/edit', component: RecipeEditComponent, resolve: [RecipesResolverService]},
   ]},
   { path: 'shopping-list', component: ShoppingListComponent },
 ];
