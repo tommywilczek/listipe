@@ -1,8 +1,18 @@
 <div class="row">
   <div class="col-md-6 col-md-offset-3">
-    <div class="alert alert-danger" *ngIf="errorMessage">
+    <!-- <div class="alert alert-danger" *ngIf="errorMessage">
       <p>{{ errorMessage }}</p>
-    </div>
+    </div> -->
+    <!-- <app-alert 
+      [message]="errorMessage" 
+      *ngIf="errorMessage" 
+      (close)="onHandleError()"
+    ></app-alert> -->
+    <ng-template appPlaceholder></ng-template> 
+    <!-- ngtemplate is a directive that does not render anything to the DOM, 
+      but still is accessible in the Angular templating language.
+      This is good for us because we don't have to render a whole extra DOM element here,
+      we can just get access to a place in the DOM. -->
     <div *ngIf="isLoading" style="text-align: center">
       <app-loading-spinner></app-loading-spinner>
     </div>
