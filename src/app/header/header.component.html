@@ -7,17 +7,33 @@
       <a routerLink="/" class="navbar-brand">Recipe Book</a>
     </div>
     <div class="navbar-collapse" [class.collapse]="collapsed" (window:resize)="collapsed = true">
-      <ul class="nav navbar-nav">
-        <li><a [routerLink]="['/recipes']" routerLinkActive="active">Recipes</a></li>
+      <ul class="nav navbar-nav" (click)="collapsed = true">
+        <li>
+          <a 
+            [routerLink]="['/recipes']" 
+            routerLinkActive="active"
+            *ngIf="isAuthenticated">Recipes</a>
+        </li>
+        <li>
+          <a 
+            [routerLink]="['/auth']" 
+            routerLinkActive="active"
+            *ngIf="!isAuthenticated">Auth</a>
+        </li>
         <li><a [routerLink]="['/shopping-list']" routerLinkActive="active">Shopping List</a></li>
       </ul>
       <ul class="nav navbar navbar-right">
-        <li appDropdown class="dropdown">
+        <li (click)="collapsed = true">
+          <a 
+            style="cursor: pointer"
+            *ngIf="isAuthenticated" (click)="onLogout()">Log Out</a>
+        </li>
+        <li appDropdown class="dropdown" *ngIf="isAuthenticated">
           <a class="dropdown-toggle" role="button">Manage <span class="caret"></span></a>
-          <ul class="dropdown-menu">
+          <ul class="dropdown-menu" (click)="collapsed = true">
             <li><a style="cursor: pointer" (click)="onSaveData()">Save Data</a></li>
             <li><a style="cursor: pointer" (click)="onFetchData()">Fetch Data</a></li>
-          </ul>
+          </ul> 
         </li>
       </ul>
     </div>

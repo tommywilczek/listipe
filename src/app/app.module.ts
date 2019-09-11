@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -16,7 +16,10 @@ import { DropdownDirective } from './shared/dropdown/dropdown.directive';
 import { PleaseSelectRecipeComponent } from './recipeComponents/please-select-recipe/please-select-recipe.component';
 import { RecipeEditComponent } from './recipeComponents/recipe-edit/recipe-edit.component';
 import { RecipeService } from './services/recipe.service';
-import { AuthComponent } from './auth/auth/auth.component';
+import { AuthComponent } from './auth/auth.component';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { AuthInterceptorService } from './auth/auth-interceptor.service';
+import { AlertComponent } from './shared/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,8 @@ import { AuthComponent } from './auth/auth/auth.component';
     PleaseSelectRecipeComponent,
     RecipeEditComponent,
     AuthComponent,
+    LoadingSpinnerComponent,
+    AlertComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,7 +45,14 @@ import { AuthComponent } from './auth/auth/auth.component';
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [RecipeService],
+  providers: [
+    RecipeService, 
+    {
+      provide: HTTP_INTERCEPTORS, 
+      useClass: AuthInterceptorService, 
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
