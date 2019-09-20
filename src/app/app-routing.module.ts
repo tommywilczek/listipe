@@ -1,12 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ShoppingListComponent } from './shoppingComponents/shopping-list/shopping-list.component';
-import { AuthComponent } from './auth/auth.component';
-
 const routes: Routes = [
   { path: '', redirectTo: '/recipes', pathMatch: 'full' },
-  { path: 'auth', component: AuthComponent },
+  // { path: 'recipes', loadChildren: './recipes/recipes.module#RecipesModule'} // Lazy loading. in the string, it's the filepath to the module + # + the module class name
 ];
 
 @NgModule({
