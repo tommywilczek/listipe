@@ -9,7 +9,7 @@ import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { RecipesResolverService } from '../services/recipes-resolver.service';
 
 const routes: Routes = [
-  { path: 'recipes', component: RecipesComponent, 
+  { path: 'recipes', component: RecipesComponent, // If you're lazy loading this, make the path '' instead of 'recipes', because it will have the 'recipes' path in app-routing.module
     canActivate: [AuthGuard],
     children: [
       { path: '', component: PleaseSelectRecipeComponent, pathMatch: 'full' },

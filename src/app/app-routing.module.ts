@@ -7,7 +7,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes)], // here, when using lazy loading, you can set a pre-loading strategy, for example, PreloadingAllModules
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
