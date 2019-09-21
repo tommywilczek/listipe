@@ -4,6 +4,8 @@ import { catchError, tap } from 'rxjs/operators';
 import { throwError, Subject, BehaviorSubject } from 'rxjs';
 import { User } from './user.model';
 
+import { environment } from '../../environments/environment';
+
 // firebase tells us the response data we're going to get back (five fields)
 // so here's an interface to define how the response will look like
 export interface AuthResponseData {
@@ -22,7 +24,7 @@ export class AuthService {
   user = new BehaviorSubject<User>(null); // The bahavior subject gives subscribers access to the previous emitted value, even if they hadn't subscribed at the point in time that value was submitted.
   tokenExpirationTimer: any;
 
-  FIREBASE_API_KEY = 'AIzaSyBGZWUJbkMw6lQHTQcwJjDTtVXC8HdNy78';
+  FIREBASE_API_KEY = environment.firebasAPIkey;
   FIREBASE_SIGNUP_AUTH_ENDPOINT = 'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key='; 
   FIREBASE_SIGNIN_AUTH_ENDPOINT = 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key='
 
